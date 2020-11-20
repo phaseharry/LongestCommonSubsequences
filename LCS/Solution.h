@@ -13,6 +13,7 @@ class Solution {
 		void initTable();
 		void getSequences();
 	public:
+		Solution(string str1, string str2);
 		void longestCommonSubsequence();
 };
 
