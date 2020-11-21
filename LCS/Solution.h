@@ -10,11 +10,17 @@ class Solution {
 	private:
 		int longestSubsequenceLength;
 		set<string> longestSubsequences;
+		int **lcsTable;
+		string word1, word2;
 		void initTable();
-		void getSequences();
+		void clearTable();
+		void getSequences(int w1, int w2, string str);
+		void printResults();
+		void printLcsTable();
 	public:
 		Solution(string str1, string str2);
 		void longestCommonSubsequence();
+		void rerun(string str1, string str2);
 };
 
 #endif
