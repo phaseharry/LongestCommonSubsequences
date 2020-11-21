@@ -7,6 +7,10 @@ using namespace std;
 
 Solution::Solution() {}
 
+/* 
+initializes the tabulation table where rows represent the length of word1 
+and cols represents the length of col 
+*/
 void Solution::initTable() {
 	int rows = word1.length() + 1;
 	int cols = word2.length() + 1;
@@ -20,6 +24,10 @@ void Solution::initTable() {
 	lcsTable = table;
 }
 
+/*
+clears the tabulation table after each word pairs run so its cleared for the 
+next pair of words
+*/
 void Solution::clearTable() {
 	int rows = word1.length();
 	int cols = word2.length();
@@ -29,17 +37,25 @@ void Solution::clearTable() {
 	delete[] lcsTable;
 }
 
+/*
+Generates the list of longest subsequences based on the table
+*/
 void Solution::getSequences(int w1, int w2, string str) {
-	if (w1 < 0 || w2 < 0) return;
-	if (lcsTable[w1][w2] == 0) {
+	if (w1 < 0 || w2 < 0) return; // if either pointers are out of bounds, just stop.
+	if (lcsTable[w1][w2] == 0) { // if we reach a 0 in the table, we know we have a subsequence, so add it to the set
 		longestSubsequences.insert(str);
 		return;
 	}
-	if (word1[w1 - 1] == word2[w2 - 1]) getSequences(w1 - 1, w2 - 1, word1[w1 - 1] + str);
+	// if the characters are each, then we know that they are part of a common subsequence so move both pointers and increment it with the current character
+	if (word1[w1 - 1] == word2[w2 - 1]) getSequences(w1 - 1, w2 - 1, word1[w1 - 1] + str); 
+	// check both cases where 1 pointer goes down and the other stays the same
 	if (lcsTable[w1][w2] == lcsTable[w1][w2 - 1]) getSequences(w1, w2 - 1, str);
 	if (lcsTable[w1][w2] == lcsTable[w1 - 1][w2]) getSequences(w1 - 1, w2, str);
 }
 
+/*
+Computes the longest subsequence of both words.
+*/
 void Solution::longestCommonSubsequence() {
 	initTable();
 	for (int row = 1; row <= word1.length(); row++) {
