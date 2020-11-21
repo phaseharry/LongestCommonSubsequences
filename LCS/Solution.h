@@ -18,9 +18,9 @@ class Solution {
 		void printResults();
 		void printLcsTable();
 	public:
-		Solution(string str1, string str2);
+		Solution();
 		void longestCommonSubsequence();
-		void rerun(string str1, string str2);
+		void run(string str1, string str2);
 };
 
 #endif

@@ -5,11 +5,7 @@
 
 using namespace std;
 
-Solution::Solution(string str1, string str2) {
-	word1 = str1;
-	word2 = str2;
-	longestCommonSubsequence();
-}
+Solution::Solution() {}
 
 void Solution::initTable() {
 	int rows = word1.length() + 1;
@@ -25,9 +21,9 @@ void Solution::initTable() {
 }
 
 void Solution::clearTable() {
-	int rows = word1.length() + 1;
-	int cols = word2.length() + 1;
-	for (int i = 0; i < cols; i++) {
+	int rows = word1.length();
+	int cols = word2.length();
+	for (int i = 0; i < rows; i++) {
 		delete[] lcsTable[i];
 	}
 	delete[] lcsTable;
@@ -82,7 +78,7 @@ void Solution::printResults() {
 	}
 }
 
-void Solution::rerun(string str1, string str2) {
+void Solution::run(string str1, string str2) {
 	longestSubsequenceLength = 0;
 	longestSubsequences.clear();
 	clearTable();
